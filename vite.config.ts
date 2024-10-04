@@ -4,5 +4,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: "https://github.com/lucaromagnoli/ds-mock-spa",
+  base: "/ds-mock-spa",
+  build: {
+    outDir: "build",
+  },
 });
