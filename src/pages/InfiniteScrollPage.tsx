@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { fetchPosts } from "../services";
-import Posts from "../components/Posts";
+import Posts, { Post } from '../components/Posts'
 
-const InfiniteScrollPage = () => {
-  const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const observer = useRef();
+const InfiniteScrollPage: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const loadMorePosts = useCallback(async () => {
     setLoading(true);
-    const newPosts = await fetchPosts(page, 10);
+    const newPosts: Post[] = await fetchPosts(page, 10);
     if (newPosts.length === 0) {
       setHasMore(false); // Set hasMore to false if no more posts are returned
     } else {
@@ -27,7 +27,7 @@ const InfiniteScrollPage = () => {
   }, [loadMorePosts, hasMore]);
 
   const lastPostElementRef = useCallback(
-    (node) => {
+    (node: HTMLElement | null) => {
       if (loading || !hasMore) return; // Stop observing if loading or no more posts
       if (observer.current) observer.current.disconnect();
 

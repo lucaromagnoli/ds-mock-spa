@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { fetchPosts } from "../services";
-import Posts from "../components/Posts";
+import Posts, { Post } from "../components/Posts";
 
-const LoadMorePage = () => {
-  const [posts, setPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
+const LoadMorePage: React.FC = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   const loadMorePosts = useCallback(async () => {
     setLoading(true);
-    const newPosts = await fetchPosts(page, 10);
+    const newPosts: Post[] = await fetchPosts(page, 10);
     if (newPosts.length === 0) {
       setHasMore(false); // Set hasMore to false if no more posts are returned
     } else {
@@ -30,7 +30,7 @@ const LoadMorePage = () => {
   return (
     <div>
       <h1>Load More</h1>
-      <Posts posts={posts} />
+      <Posts posts={posts} lastPostElementRef={() => {}} />
       {loading && <p>Loading...</p>}
       {!loading && hasMore && (
         <button onClick={handleLoadMore}>Load More</button>
