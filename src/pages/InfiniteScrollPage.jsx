@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { fetchPosts } from "../services";
 import Posts from "../components/Posts";
 
-const PostsList = () => {
+const InfiniteScrollPage = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -45,17 +45,6 @@ const PostsList = () => {
   return (
     <div>
       <h1>Infinite Scrolling</h1>
-      {/* <ul>
-        {posts.map((post, index) => (
-          <li
-            key={post.id} // Use post.id directly
-            ref={posts.length === index + 1 ? lastPostElementRef : null}
-          >
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
-          </li>
-        ))}
-      </ul> */}
       <Posts posts={posts} lastPostElementRef={lastPostElementRef} />
       {loading && <p>Loading...</p>}
       {/* Message indicating no more posts */}
@@ -63,4 +52,4 @@ const PostsList = () => {
   );
 };
 
-export default PostsList;
+export default InfiniteScrollPage;

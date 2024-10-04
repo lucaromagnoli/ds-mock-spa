@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import InfiniteScrollPage from './pages/InfiniteScrollPage';
-// import LoadMorePage from './pages/LoadMorePage';
+import LoadMorePage from './pages/LoadMorePage';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const App: React.FC = () => {
       </nav>
       <Routes>
         <Route path="/" element={<InfiniteScrollPage />} />
-        {/* <Route path="/load-more" element={<LoadMorePage />} /> */}
+        <Route path="/load-more" element={<LoadMorePage />} />
       </Routes>
     </Router>
   );

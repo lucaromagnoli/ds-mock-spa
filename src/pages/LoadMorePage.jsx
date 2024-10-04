@@ -1,34 +1,43 @@
+import React, { useCallback, useEffect, useState } from "react";
+import { fetchPosts } from "../services";
+import Posts from "../components/Posts";
 
-import React, { useState } from 'react';
+const LoadMorePage = () => {
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-const YourComponent = () => {
-  // Your initial data
-  const initialData = [
-    // ... your data array
-  ];
+  const loadMorePosts = useCallback(async () => {
+    setLoading(true);
+    const newPosts = await fetchPosts(page, 10);
+    if (newPosts.length === 0) {
+      setHasMore(false); // Set hasMore to false if no more posts are returned
+    } else {
+      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+    }
+    setLoading(false);
+  }, [page]);
 
-  // State to manage displayed data and load more button
-  const [displayedData, setDisplayedData] = useState(initialData);
-  const [visibleItemCount, setVisibleItemCount] = useState(5); // Change this as needed
+  useEffect(() => {
+    loadMorePosts();
+  }, [loadMorePosts]);
 
-  // Handler for the "Load More" button
   const handleLoadMore = () => {
-    // Increase the visible item count (you can adjust this logic based on your requirements)
-    setVisibleItemCount(prevCount => prevCount + 5);
-
-    // Update displayedData with additional items
-    setDisplayedData(initialData.slice(0, visibleItemCount + 5));
+    setPage((prevPage) => prevPage + 1);
   };
 
   return (
     <div>
-      {displayedData.map((item, index) => (
-        // Render your data items here
-        <div key={index}>{item}</div>
-      ))}
-      <button onClick={handleLoadMore}>Load More</button>
+      <h1>Load More</h1>
+      <Posts posts={posts} />
+      {loading && <p>Loading...</p>}
+      {!loading && hasMore && (
+        <button onClick={handleLoadMore}>Load More</button>
+      )}
+      {!hasMore && <p>No more posts</p>}
     </div>
   );
 };
 
-export default YourComponent;
+export default LoadMorePage;
