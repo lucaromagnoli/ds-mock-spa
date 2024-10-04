@@ -9,7 +9,7 @@ import './App.css'; // Import custom CSS
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/ds-mock-spa">
       <div>
         <Header />
         <Container className="main-content d-flex flex-column justify-content-center align-items-center text-center">
