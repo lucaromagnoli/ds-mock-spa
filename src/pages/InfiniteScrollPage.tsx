@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from "react";
+import { Container, Spinner } from "react-bootstrap";
 import getPosts from "../hooks/getPosts";
 import Posts from "../components/Posts";
 
@@ -23,11 +24,11 @@ const InfiniteScrollPage: React.FC = () => {
   );
 
   return (
-    <div>
-      <h1>Infinite Scrolling</h1>
+    <Container className="d-flex flex-column justify-content-center align-items-center text-center">
+      <h1 className="mb-4">Infinite Scrolling</h1>
       <Posts posts={posts} lastPostElementRef={lastPostElementRef} />
-      {loading && <p>Loading...</p>}
-    </div>
+      {loading && <Spinner animation="border" />}
+    </Container>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Container, Spinner } from "react-bootstrap";
 import getPosts from "../hooks/getPosts";
 import Posts from "../components/Posts";
 
@@ -10,15 +11,15 @@ const LoadMorePage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Load More</h1>
+    <Container className="d-flex flex-column justify-content-center align-items-center text-center">
+      <h1 className="mb-4">Load More</h1>
       <Posts posts={posts} lastPostElementRef={() => {}} />
-      {loading && <p>Loading...</p>}
+      {loading && <Spinner animation="border" />}
       {!loading && hasMore && (
-        <button onClick={handleLoadMore}>Load More</button>
+        <Button variant="primary" onClick={handleLoadMore}>Load More</Button>
       )}
       {!hasMore && <p>No more posts</p>}
-    </div>
+    </Container>
   );
 };
 

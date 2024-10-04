@@ -40,3 +40,17 @@
 .read-the-docs {
   color: #888;
 }
+
+header {
+  padding-top: 10px;
+}
+
+.custom-navbar {
+  padding: 10px 0; 
+  text-align: center;
+}
+
+
+.main-content {
+  padding-top: 20px;
+}
