@@ -7,7 +7,7 @@ const Header: React.FC = () => {
     <>
       <header className="header">
         <Container>
-          <h1 className="fw-bold">DataService Mock SPA</h1>
+          <h1 className="fw-bold">DataService Test Page</h1>
         </Container>
       </header>
       <div className="custom-navbar">
